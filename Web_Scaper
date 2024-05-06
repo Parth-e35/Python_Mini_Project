@@ -1,0 +1,26 @@
+import requests
+from bs4 import BeautifulSoup
+
+try:
+   #Prompt User to Enter URL
+   url=input("Enter a URL of a Website to get Scapped:")
+except:
+   print("PLEASE ENTER VALID URL!!")
+
+#using requests module's get()
+r=requests.get(url)
+
+#Prompt User for Option
+print("1.Find all <p> Tags Only\n2.All Contents of Website")
+choice=input("Choose Any One:")
+
+
+if choice=="1":
+  #For all <p> Tags
+  content=soup.find_all('p')
+  print(content)
+
+elif choice=="2":
+  #For all Contents
+  soup=BeautifulSoup(r.content,'html.parser')
+  print(soup.prettify())
