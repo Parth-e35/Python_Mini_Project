@@ -4,23 +4,65 @@ from bs4 import BeautifulSoup
 try:
    #Prompt User to Enter URL
    url=input("Enter a URL of a Website to get Scapped:")
-except:
-   print("PLEASE ENTER VALID URL!!")
 
-#using requests module's get()
-r=requests.get(url)
+   #using requests module's get()
+   r=requests.get(url)
+
+except Exception :
+   print("PLEASE ENTER A VALID URL!!")
+   exit()
 
 #Prompt User for Option
-print("1.Find all <p> Tags Only\n2.All Contents of Website")
+print('''1.Find <head> Tags Only
+2.Find <Body> Tags Only
+3.Find All <p> Tags Only
+4.Find All <h1> Tags Only
+5.Find All <a> Tags Only
+6.Find <header> Tags Only
+7.Find <footer> Tags Only
+8.All Contents of Website''')
 choice=input("Choose Any One:")
 
+soup=BeautifulSoup(r.content,'html.parser')
 
 if choice=="1":
-  #For all <p> Tags
-  content=soup.find_all('p')
-  print(content)
+  #For <head> Tags
+  content=soup.find_all('head')
 
 elif choice=="2":
+  #For <head> Tags
+  content=soup.find_all('body')
+
+elif choice=="3":
+  #For all <p> Tags
+  content=soup.find_all('p')
+
+elif choice=="4":
+  #for all <h1> Tags
+  content=soup.find_all('h1')
+
+elif choice=="5":
+   #For all <a> Tags
+   content=soup.find_all('a')
+
+elif choice=="6":
+   #For <header> Tags
+   content=soup.find_all('header')
+
+elif choice=="7":
+   #For <footer> Tags
+   content=soup.find_all('footer')
+
+elif choice=="8":
   #For all Contents
-  soup=BeautifulSoup(r.content,'html.parser')
-  print(soup.prettify())
+  content=soup.prettify()
+
+else:
+  print("Invalid Option!!")
+  exit()
+
+if choice != "8":
+    for tag in content:
+        print(tag)
+else:
+    print(content)
