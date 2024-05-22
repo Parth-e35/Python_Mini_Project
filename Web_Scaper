@@ -1,3 +1,6 @@
+#Coded By Parth Shendre
+#Web scraping refers to the extraction of data from a website.
+
 import requests
 from bs4 import BeautifulSoup
 
